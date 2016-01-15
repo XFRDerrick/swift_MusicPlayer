@@ -1,6 +1,7 @@
 # swift_MusicPlayer
 使用swift编写的一个音乐播放器 的Demo
 
+使用storyBoard
 
 NSObject+PlistAnalysis.swift 使用运行时做的一个字典转模型的一个分类工具
 
