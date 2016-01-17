@@ -31,8 +31,10 @@ class HTFPlayMusicTool: NSObject {
             players![name] = player
             
         }
-        
-        player!.play()
+        //TODO:- 全局断点会再此处停止为什么？？？
+        if ((player?.play()) != nil) {
+            player?.play()
+        }
         
         return player!
         
@@ -55,6 +57,7 @@ class HTFPlayMusicTool: NSObject {
         
         if (player != nil) {
             
+            //TODO:- 全局断点会再此处停止为什么？？？
             player?.stop()
             player = nil
             

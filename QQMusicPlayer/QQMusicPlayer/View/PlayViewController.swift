@@ -10,7 +10,7 @@ import UIKit
 
 import AVFoundation
 
-class PlayViewController: UIViewController , AVAudioPlayerDelegate {
+class PlayViewController: UIViewController , AVAudioPlayerDelegate , UIScrollViewDelegate{
 
     //MARK:- 数据属性
     var music: HTFMusic?
@@ -18,6 +18,8 @@ class PlayViewController: UIViewController , AVAudioPlayerDelegate {
     var player: AVAudioPlayer?
     
     var timer: NSTimer?
+    
+    var link: CADisplayLink!
     
     private var point: CGPoint? //= CGPointMake(0, 0)
     
@@ -38,9 +40,11 @@ class PlayViewController: UIViewController , AVAudioPlayerDelegate {
     @IBOutlet weak var playPauseBtn: UIButton!
     //MARK:- 上部View属性
     
+    @IBOutlet weak var lrcLable: HTFLable!
     @IBOutlet weak var backImageView: UIImageView!
     @IBOutlet weak var singerIconView: UIImageView!
     
+    @IBOutlet weak var containView: UIView!
     @IBOutlet weak var nameLable: UILabel!
     
     @IBOutlet weak var singerNameLable: UILabel!
@@ -59,8 +63,27 @@ class PlayViewController: UIViewController , AVAudioPlayerDelegate {
         
         self.view.frame = CGRectMake(0, window!.height, window!.width, window!.height)
         
+        scrollView.delegate = self
+        
+        scrollView.showsHorizontalScrollIndicator = false
+        
     }
-
+    //MARK:- 在ScrollView 的操作
+    override func viewWillLayoutSubviews() {
+       
+        scrollView.contentSize = CGSizeMake(scrollView.width * 2, scrollView.height)
+        
+    }
+    
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        let point = scrollView.contentOffset
+        
+        let scale = point.x / scrollView.width
+        
+        containView.alpha = 1.0 - scale * 0.8
+    }
+    
+    //MARK:-
     internal func show(){
     
         let window = UIApplication.sharedApplication().keyWindow
@@ -133,9 +156,7 @@ class PlayViewController: UIViewController , AVAudioPlayerDelegate {
         
         //添加定时器
         addTimer()
-        
-        
-      
+        addLink()
         
     }
     
@@ -153,6 +174,7 @@ class PlayViewController: UIViewController , AVAudioPlayerDelegate {
         totalTimeLable.text = nil
     
         removeTimer()
+        removeLink()
     }
     
     @IBAction func back(sender: UIButton) {
@@ -167,6 +189,7 @@ class PlayViewController: UIViewController , AVAudioPlayerDelegate {
             
                 window?.userInteractionEnabled = true
                 self.removeTimer()
+                self.removeLink()
         }
         
     }
@@ -178,12 +201,13 @@ class PlayViewController: UIViewController , AVAudioPlayerDelegate {
         if !playPauseBtn.selected {
             
             HTFPlayMusicTool.pauseMusicWithName(music!.filename!)
-          
-            
+            //停止
+            removeLink()
+            removeTimer()
         }else{
             HTFPlayMusicTool.playMusicWithName(music!.filename!)
             addTimer()
-            
+            addLink()
         }
         
         playPauseBtn.selected = !playPauseBtn.selected
@@ -243,11 +267,32 @@ class PlayViewController: UIViewController , AVAudioPlayerDelegate {
         //滑块时间
         slideBtn.setTitle(setUpTime(player!.currentTime), forState: .Normal)
         
-//        point = slideBtn.center
+    }
+    
+    private func addLink(){
+    
+        link = CADisplayLink(target: self, selector: "updateTime")
         
+        link.addToRunLoop(NSRunLoop.mainRunLoop(), forMode: NSRunLoopCommonModes)
         
         
     }
+    private func removeLink(){
+    
+        link.invalidate()
+        link = nil
+        
+    }
+    
+    @objc private func updateTime(){
+    
+        scrollView.currentTime = player?.currentTime
+        
+        lrcLable.currentTime = player?.currentTime
+        
+    }
+    
+    
 
     //MARK:- 添加手势实现拖动点击的快进快退
     @IBAction func whiteViewTap(sender: UITapGestureRecognizer) {

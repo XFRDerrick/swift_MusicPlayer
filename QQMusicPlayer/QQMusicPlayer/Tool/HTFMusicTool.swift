@@ -30,7 +30,7 @@ class HTFMusicTool: NSObject {
     
         
         var index = _musics!.indexOfObject(_music!)
-        
+
         if index == _musics!.count - 1 {
         
             index = 0
@@ -38,7 +38,7 @@ class HTFMusicTool: NSObject {
         
             index = index + 1
         }
-        
+
         let musicn = _musics![index]
         
         
@@ -48,8 +48,8 @@ class HTFMusicTool: NSObject {
     
     class func previousMusic() {
         
-        var index = _musics!.indexOfObject(_musics!)
-        
+        var index = _musics!.indexOfObject(_music!)
+
         if index == 0 {
             
             index = _musics!.count - 1

@@ -12,8 +12,6 @@ import Foundation
 extension NSObject {
     
     
-    
-    
     class func objectWithKeyValues(keyValues:NSDictionary) -> AnyObject{
         let model = self.init()
         //存放属性的个数

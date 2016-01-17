@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PlayViewController" customModule="QQMusicPlayer" customModuleProvider="target">
@@ -10,7 +11,9 @@
                 <outlet property="backImageView" destination="IaJ-lN-Eml" id="ijD-Vu-Ypv"/>
                 <outlet property="colorView" destination="ANR-a8-1Q8" id="kaK-LT-ec9"/>
                 <outlet property="colorViewWidth" destination="GLd-IT-n1c" id="5nA-wJ-jiK"/>
+                <outlet property="containView" destination="CpX-fb-gEM" id="1Fo-ir-1ob"/>
                 <outlet property="hiddenTimeLable" destination="D2d-wP-etX" id="q9e-RE-nIu"/>
+                <outlet property="lrcLable" destination="3nA-qq-FLb" id="mJi-R3-VzG"/>
                 <outlet property="nameLable" destination="Pbd-GW-apy" id="qVp-fd-b1P"/>
                 <outlet property="playPauseBtn" destination="MoD-ho-K4d" id="BK5-FK-Sfq"/>
                 <outlet property="scrollView" destination="0ha-5U-MTM" id="KiR-r9-IAs"/>
@@ -179,20 +182,32 @@
                         <constraint firstItem="rIx-mV-j1y" firstAttribute="top" secondItem="CpX-fb-gEM" secondAttribute="top" id="zAY-T1-Pk1"/>
                     </constraints>
                 </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3nA-qq-FLb" customClass="HTFLable" customModule="QQMusicPlayer" customModuleProvider="target">
+                    <rect key="frame" x="279" y="290" width="42" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="RNL-8y-GMB"/>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="hk3-MB-9au"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0ha-5U-MTM" customClass="HTFLrcScrollView" customModule="QQMusicPlayer" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="400"/>
                     <subviews>
-                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="HNn-Bh-GW0">
-                            <rect key="frame" x="0.0" y="0.0" width="600" height="400"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="HNn-Bh-GW0">
+                            <rect key="frame" x="600" y="0.0" width="600" height="400"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <color key="sectionIndexColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <connections>
                                 <outlet property="dataSource" destination="0ha-5U-MTM" id="AMa-xk-YRD"/>
                             </connections>
                         </tableView>
                     </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstItem="HNn-Bh-GW0" firstAttribute="centerX" secondItem="0ha-5U-MTM" secondAttribute="centerX" id="2e7-PF-diZ"/>
+                        <constraint firstItem="HNn-Bh-GW0" firstAttribute="centerX" secondItem="0ha-5U-MTM" secondAttribute="centerX" multiplier="3" id="2e7-PF-diZ"/>
                         <constraint firstItem="HNn-Bh-GW0" firstAttribute="centerY" secondItem="0ha-5U-MTM" secondAttribute="centerY" id="69O-OC-n45"/>
                         <constraint firstItem="HNn-Bh-GW0" firstAttribute="height" secondItem="0ha-5U-MTM" secondAttribute="height" id="6Dt-zl-fbl"/>
                         <constraint firstItem="HNn-Bh-GW0" firstAttribute="width" secondItem="0ha-5U-MTM" secondAttribute="width" id="mhO-uy-zo5"/>
@@ -213,11 +228,14 @@
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstItem="NP4-KM-JZR" firstAttribute="top" secondItem="3nA-qq-FLb" secondAttribute="bottom" constant="89" id="1of-zp-Z94"/>
                 <constraint firstItem="0nx-dt-y5V" firstAttribute="width" secondItem="IaJ-lN-Eml" secondAttribute="width" id="3CX-wf-Udl"/>
+                <constraint firstItem="3nA-qq-FLb" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="3k6-j4-cW7"/>
                 <constraint firstAttribute="bottom" secondItem="IaJ-lN-Eml" secondAttribute="bottom" id="3wQ-jG-wYR"/>
                 <constraint firstItem="0nx-dt-y5V" firstAttribute="centerX" secondItem="IaJ-lN-Eml" secondAttribute="centerX" id="4QB-aW-X5a"/>
                 <constraint firstItem="0ha-5U-MTM" firstAttribute="height" secondItem="CpX-fb-gEM" secondAttribute="height" id="5id-et-8BH"/>
                 <constraint firstAttribute="trailing" secondItem="IaJ-lN-Eml" secondAttribute="trailing" id="BQG-W8-cVv"/>
+                <constraint firstItem="3nA-qq-FLb" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="C2s-Rf-6CA"/>
                 <constraint firstItem="NP4-KM-JZR" firstAttribute="top" secondItem="CpX-fb-gEM" secondAttribute="bottom" id="CbE-AA-7sS"/>
                 <constraint firstItem="0ha-5U-MTM" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="FG9-re-ucT"/>
                 <constraint firstItem="CpX-fb-gEM" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="IjQ-AG-08C"/>
@@ -227,6 +245,7 @@
                 <constraint firstAttribute="bottom" secondItem="NP4-KM-JZR" secondAttribute="bottom" id="YxP-Zw-gKd"/>
                 <constraint firstItem="0nx-dt-y5V" firstAttribute="height" secondItem="IaJ-lN-Eml" secondAttribute="height" id="ghS-u8-fse"/>
                 <constraint firstItem="9Ku-yk-ok2" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="iv0-Mc-MmQ"/>
+                <constraint firstAttribute="trailing" secondItem="3nA-qq-FLb" secondAttribute="trailing" id="lYc-b9-DSv"/>
                 <constraint firstAttribute="trailing" secondItem="CpX-fb-gEM" secondAttribute="trailing" id="pRo-zn-E1K"/>
                 <constraint firstItem="0nx-dt-y5V" firstAttribute="centerY" secondItem="IaJ-lN-Eml" secondAttribute="centerY" id="rD9-Y0-A3D"/>
                 <constraint firstItem="CpX-fb-gEM" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="rcH-vx-Pa5"/>
@@ -236,6 +255,12 @@
                 <constraint firstAttribute="trailing" secondItem="NP4-KM-JZR" secondAttribute="trailing" id="wjS-Oc-Xn0"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="3k6-j4-cW7"/>
+                    <exclude reference="lYc-b9-DSv"/>
+                </mask>
+            </variation>
         </view>
         <tapGestureRecognizer id="O5a-uX-I6X">
             <connections>
